@@ -1,8 +1,9 @@
-'use client'
-import React, { useEffect, useState } from 'react'
-import Image from "next/image"
+import React from 'react'
 import Link from 'next/link'
-const page = () => {
+const page = async () => {
+    // await new Promise((resolve) => {
+    //     setTimeout(resolve, 3000)
+    // })
     return (
     <div className='px-[60px]'>
         <ul>

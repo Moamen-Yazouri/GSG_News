@@ -1,9 +1,10 @@
 import React from 'react'
 
-const LoadingNews = () => {
-  return (
-    <div>loading...</div>
-  )
+const loading = () => {
+    return (
+        <div>loading...</div>
+    )
+    
 }
 
-export default LoadingNews;
+export default loading

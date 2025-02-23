@@ -11,7 +11,7 @@ const fetchNews = async (category: string, country: string) => {
     return new Promise ((resolve) => {
         setTimeout(() => {
             resolve(news);
-        }, 3000)
-    } ) as Promise<News.Item[]>;
+        }, 5000)
+    } );
 }
 export default fetchNews;

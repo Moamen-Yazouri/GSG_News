@@ -5,7 +5,7 @@ interface IProps {
 }
 const NewsList = async (props: IProps) => {
     const {category, country} = await props.params;
-    const latestNews = await fetchNews(category, country);
+    const latestNews = await fetchNews(category, country) as News.Item[];
 
     return (
         <Fetching news={latestNews} country={country} category={category}/>

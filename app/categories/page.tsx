@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import Categories from '@/components/Categories/Categories';
 const page = async () => {
-    await new Promise(resolve => setTimeout(resolve, 5000));
     return (
         <div className='px-[60px]'>
             <Categories/>

@@ -22,9 +22,14 @@ const fetchNews = async (category: string, country: string) => {
   } else {
     // triggering notFound manually
     // notFound();
+    console.log("finished");
   }
 
-  return latestNews as News.Item[];
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(latestNews as News.Item[])
+    }, 5000)
+  });
 }
 
 export {

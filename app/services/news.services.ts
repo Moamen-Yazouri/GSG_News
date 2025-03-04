@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-const api_key = 'pub_69675b359f778a6ecbb631d39cbd30af4c4f7';
+const api_key = 'pub_726688ae6341fd20c1360e91fba5c1d822b7f';
 
 const fetchNews = async (category: string, country: string) => {
   const res = await fetch(
@@ -21,12 +21,10 @@ const fetchNews = async (category: string, country: string) => {
     ));
   } else {
     // triggering notFound manually
-    notFound();
+    // notFound();
   }
 
-  return new Promise((resolve) => setTimeout(() => {
-    resolve(latestNews);
-  }, 1000));
+  return latestNews as News.Item[];
 }
 
 export {

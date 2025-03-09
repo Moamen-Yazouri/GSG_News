@@ -4,83 +4,148 @@ const db = sql('news.db');
 
 const dummyArticles = [
   {
-    "title": "Understanding JavaScript Closures",
-    "slug": "understanding-javascript-closures",
-    "image": "https://example.com/images/js-closures.jpg",
-    "content": "Closures are a fundamental concept in JavaScript that allow functions to retain access to variables from their parent scope, even after the parent function has finished execution...",
-    "summary": "A deep dive into JavaScript closures and their practical applications.",
-    "author": "John Doe",
-    "author_email": "johndoe@example.com",
-    "date": 1709856000,
-    "category": "global"
+    title: 'Local Election Results Announced',
+    slug: 'local-election-results-2025',
+    image: '/images/election.jpg',
+    summary: 'Final results from the 2025 local elections show surprising shifts in voter preferences.',
+    content: `
+      The local elections concluded yesterday with a turnout of 68%. 
+      Key winners include Jane Doe for mayor and several new council members. 
+      Full breakdown available on the official city website.
+    `,
+    author: 'Sarah Miller',
+    author_email: 'sarahmiller@example.com',
+    date: 1740787200000, // March 1, 2025 00:00:00 UTC
+    category: 'global'
   },
   {
-    "title": "Laravel vs Node.js: Which One to Choose?",
-    "slug": "laravel-vs-nodejs",
-    "image": "https://example.com/images/laravel-vs-node.jpg",
-    "content": "When building web applications, one of the major choices developers face is whether to use Laravel (a PHP framework) or Node.js (JavaScript runtime)...",
-    "summary": "A comparison between Laravel and Node.js to help developers choose the best framework.",
-    "author": "Jane Smith",
-    "author_email": "janesmith@example.com",
-    "date": 1709942400,
-    "category": "finance"
+    title: 'New Tech Hub Opens Downtown',
+    slug: 'tech-hub-opening',
+    image: '/images/tech-hub.jpg',
+    summary: 'A state-of-the-art technology center opened today, promising 500 new jobs.',
+    content: `
+      The ribbon-cutting ceremony took place at 10 AM, attended by local officials. 
+      The hub will focus on AI and green tech innovations.
+    `,
+    author: 'Tom Wilson',
+    author_email: 'tomwilson@example.com',
+    date: 1740700800000, // Feb 28, 2025 00:00:00 UTC
+    category: 'gaza'
   },
   {
-    "title": "React.js Performance Optimization Techniques",
-    "slug": "reactjs-performance-optimization",
-    "image": "https://example.com/images/react-performance.jpg",
-    "content": "Optimizing performance in React.js applications involves techniques like memoization, lazy loading, and avoiding unnecessary re-renders...",
-    "summary": "Best practices for optimizing performance in React applications.",
-    "author": "Alice Brown",
-    "author_email": "alicebrown@example.com",
-    "date": 1710028800,
-    "category": "global"
+    title: 'Weather Alert: Storm Approaching',
+    slug: 'storm-alert-march-2025',
+    image: '/images/storm.jpg',
+    summary: 'Meteorologists warn of heavy rain and winds expected this weekend.',
+    content: `
+      Residents are advised to prepare for potential flooding. 
+      Emergency services are on standby.
+    `,
+    author: 'Lisa Chen',
+    author_email: 'lisachen@example.com',
+    date: 1740787200000, // March 1, 2025 00:00:00 UTC
+    category: 'gaza'
   },
   {
-    "title": "Mastering Git: Essential Commands for Developers",
-    "slug": "mastering-git-essential-commands",
-    "image": null,
-    "content": "Git is an essential tool for modern developers. Understanding commands like git clone, git commit, git push, and git merge can greatly enhance your workflow...",
-    "summary": "Essential Git commands every developer should know.",
-    "author": "Robert Wilson",
-    "author_email": "robertwilson@example.com",
-    "date": 1710115200,
-    "category": "technology"
+    title: 'Breakthrough in Renewable Energy',
+    slug: 'renewable-energy-breakthrough',
+    image: '/images/solar.jpg',
+    summary: 'Scientists unveil a new solar panel design with 30% higher efficiency.',
+    content: `
+      The innovation could revolutionize the renewable energy sector. 
+      Testing begins next month with commercial rollout planned for 2026.
+    `,
+    author: 'Dr. Emily Rogers',
+    author_email: 'emilyrogers@example.com',
+    date: 1740614400000, // Feb 27, 2025 00:00:00 UTC
+    category: 'gaza'
   },
   {
-    "title": "CSS Grid vs Flexbox: When to Use Which?",
-    "slug": "css-grid-vs-flexbox",
-    "image": "https://example.com/images/css-grid-vs-flexbox.jpg",
-    "content": "CSS Grid and Flexbox are both powerful layout tools, but they serve different purposes. Understanding their strengths and use cases can improve your design workflow...",
-    "summary": "A comparison of CSS Grid and Flexbox for responsive web design.",
-    "author": "Emily Johnson",
-    "author_email": "emilyjohnson@example.com",
-    "date": 1710201600,
-    "category": "design"
+    title: 'City Marathon Sets New Record',
+    slug: 'city-marathon-2025',
+    image: '/images/marathon.jpg',
+    summary: 'Over 10,000 runners participated in the annual city marathon.',
+    content: `
+      The event raised $500,000 for local charities. 
+      Winner John Smith finished in a record-breaking 2:15:32.
+    `,
+    author: 'Mike Johnson',
+    author_email: 'mikejohnson@example.com',
+    date: 1740528000000, // Feb 26, 2025 00:00:00 UTC
+    category: 'global'
   },
   {
-    "title": "Building a REST API with Laravel",
-    "slug": "building-rest-api-laravel",
-    "image": "https://example.com/images/laravel-rest-api.jpg",
-    "content": "Laravel makes it easy to build robust REST APIs with built-in features like routing, middleware, and authentication...",
-    "summary": "Step-by-step guide to building a REST API using Laravel.",
-    "author": "Michael Scott",
-    "author_email": "michaelscott@example.com",
-    "date": 1710288000,
-    "category": "technology"
+    title: 'New Art Gallery Opens',
+    slug: 'art-gallery-opening',
+    image: '/images/gallery.jpg',
+    summary: 'A modern art gallery featuring local artists debuted today.',
+    content: `
+      The opening exhibition showcases 50 works across various mediums. 
+      Free entry for the first week attracts large crowds.
+    `,
+    author: 'Clara Evans',
+    author_email: 'claraevans@example.com',
+    date: 1740873600000, // March 2, 2025 00:00:00 UTC
+    category: 'global'
   },
   {
-    "title": "TypeScript vs JavaScript: Which One Should You Use?",
-    "slug": "typescript-vs-javascript",
-    "image": "https://example.com/images/typescript-vs-js.jpg",
-    "content": "TypeScript offers static typing and better tooling, while JavaScript is more flexible and widely used. Understanding their differences can help you choose the right tool for your project...",
-    "summary": "An in-depth comparison of TypeScript and JavaScript for developers.",
-    "author": "Sophia Martinez",
-    "author_email": "sophiamartinez@example.com",
-    "date": 1710374400,
-    "category": "technology"
+    title: 'Stock Market Hits All-Time High',
+    slug: 'stock-market-record',
+    image: '/images/stocks.jpg',
+    summary: 'The national index soared past 40,000 points yesterday.',
+    content: `
+      Tech and energy sectors led the surge. 
+      Analysts predict cautious optimism for the coming months.
+    `,
+    author: 'Robert Lee',
+    author_email: 'robertlee@example.com',
+    date: 1740700800000, // Feb 28, 2025 00:00:00 UTC
+    category: 'finance'
+  },
+  {
+    title: 'Rare Bird Spotted in National Park',
+    slug: 'rare-bird-sighting',
+    image: '/images/bird.jpg',
+    summary: 'Birdwatchers flock to see a species not seen here in decades.',
+    content: `
+      The sighting of the elusive azure-winged hawk has excited ornithologists. 
+      Park officials urge visitors to respect wildlife habitats.
+    `,
+    author: 'Anna Patel',
+    author_email: 'annapatel@example.com',
+    date: 1740960000000, // March 3, 2025 00:00:00 UTC
+    category: 'finance'
+  },
+  {
+    title: 'New Public Transit Line Approved',
+    slug: 'transit-line-approval',
+    image: '/images/transit.jpg',
+    summary: 'City council greenlights a $200M subway extension project.',
+    content: `
+      The new line will connect downtown to the eastern suburbs. 
+      Construction is set to begin in Q3 2025.
+    `,
+    author: 'David Kim',
+    author_email: 'davidkim@example.com',
+    date: 1740614400000, // Feb 27, 2025 00:00:00 UTC
+    category: 'finance'
+  },
+  {
+    title: 'Annual Film Festival Kicks Off',
+    slug: 'film-festival-2025',
+    image: '/images/film.jpg',
+    summary: 'The 25th annual film festival opens with a star-studded gala.',
+    content: `
+      Over 100 films will be screened over the next 10 days. 
+      Highlights include a retrospective of director Mia Torres’ work.
+    `,
+    author: 'Sophie Brown',
+    author_email: 'sophiebrown@example.com',
+    date: 1740873600000, // March 2, 2025 00:00:00 UTC
+    category: 'weather'
   }
-]
+];
+
 
 
 db.prepare(`

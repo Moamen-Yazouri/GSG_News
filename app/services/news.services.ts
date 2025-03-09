@@ -4,7 +4,9 @@ const getNews = (category: string): News.Item_[] => {
   const db = sql('news.db');
   return db.prepare('SELECT * FROM articles WHERE category = ?').all(category) as News.Item_[];
 };
-
+const getNewsBySlug = (slug: string): News.Item_ => {
+  return sql('news.db').prepare('SELECT * FROM articles WHERE slug = ?').get(slug) as News.Item_;
+}
 /**
  * @deprecated we will use our DB to fetch news.
  */
@@ -36,5 +38,6 @@ const fetchNews = async (category: string, country: string) => {
 
 export {
   fetchNews,
-  getNews
+  getNews,
+  getNewsBySlug
 }

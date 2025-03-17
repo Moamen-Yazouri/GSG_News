@@ -8,6 +8,7 @@ export const GET = async (request: NextRequest) => {
         return NextResponse.json(null, {status:400, statusText: "Invalid Category"})
     }
     const news = getNews(category);
-    return NextResponse.json(news, {status: 200});
+    return NextResponse.json(news, {status: 200, headers: {}});
+    
 
 }

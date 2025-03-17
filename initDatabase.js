@@ -147,30 +147,62 @@ const dummyArticles = [
 ];
 
 
-
-db.prepare(`
-    CREATE TABLE IF NOT EXISTS articles (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        slug TEXT NOT NULL UNIQUE,
-        title TEXT NOT NULL,
-        image TEXT,
-        summary TEXT NOT NULL,
-        content TEXT NOT NULL,
-        author TEXT NOT NULL,
-        author_email TEXT NOT NULL,
-        date INTEGER NOT NULL,
-        category TEXT NOT NULL
-    )
-`).run();
-
 const insertData = () => {
   const insertCommand = db.prepare(`
     INSERT INTO articles (slug, title, image, summary, content, author, author_email, date, category)
-    VALUES (@slug, @title, @image, @summary, @content, @author, @author_email, @date, @category)
+    VALUES (
+      @slug,
+      @title, 
+      @image, 
+      @summary, 
+      @content, 
+      @author, 
+      @author_email, 
+      @date, 
+      @category
+    )
 `);
 
     for (const article of dummyArticles) {
         insertCommand.run(article);
     }
 }
-insertData();
+const prepNews = () => {
+  db.prepare(`
+      CREATE TABLE IF NOT EXISTS articles (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          slug TEXT NOT NULL UNIQUE,
+          title TEXT NOT NULL,
+          image TEXT,
+          summary TEXT NOT NULL,
+          content TEXT NOT NULL,
+          author TEXT NOT NULL,
+          author_email TEXT NOT NULL,
+          date INTEGER NOT NULL,
+          category TEXT NOT NULL
+      )
+  `).run();
+  
+  insertData();
+}
+
+const prepUsers = () => {
+  db.prepare(`
+    CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL,
+    role TEXT NOT NULL,
+    displayName TEXT NOT NULL
+);
+`).run();
+
+db.prepare(`
+INSERT INTO users (email, password, role, displayName) VALUES
+  ('admin@example.com', '1234', 'admin', 'Khaldoun Khaled'),
+  ('editor@example.com', '1234', 'editor', 'Waleed Jameel'),
+  ('sub1@example.com', '1234', 'subscriber', 'Ahmad Saeed');
+
+  `).run();
+}
+prepUsers();

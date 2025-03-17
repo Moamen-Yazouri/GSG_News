@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header/Header";
+import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: "GSG_News",
@@ -16,6 +17,7 @@ export default function RootLayout({children, latestGB, latestUS}: IProps) {
   return (
     <html lang="en">
       <body>
+        <ToastContainer/>
         <Header/>
         {children}
         {/* <section>{latestGB}</section>

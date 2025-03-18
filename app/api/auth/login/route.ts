@@ -1,26 +1,24 @@
 import {findUserByEmail } from "@/app/services/auth.services";
-import { comparePssword } from "@/app/utils/auth";
+import { comparePassword, generateToken } from "@/app/utils/auth";
 import { NextRequest, NextResponse } from "next/server";
 
 const POST = async (req: NextRequest) => {
     const {email, password} = await req.json() as {email: string, password: string};
-    const user = findUserByEmail(email);
     if(!email || !password) {
-        return new NextResponse("Email & Password are required");
+        return new NextResponse("Email & Password are required", {status: 400});
     }
+    const user = findUserByEmail(email);
     if(!user) {
         return new NextResponse("Invalid Credintials!", {status: 401})
     }
-    if(!comparePssword(password, user.password!)) {
+    const isValidPassword = comparePassword(password, user.password || '');
+    if(!isValidPassword) {
         return new NextResponse("Invalid credintials", {status: 401});
     }
-    const userToSent = {
-        email: user.email,
-        role: user.role,
-        displayName: user.displayName
-    } 
-    return NextResponse.json(userToSent, {status: 200});
+    delete user.password
+    const token = generateToken(user);
+    return new NextResponse(token, {status: 200});
 }
 export {
-    POST,
+    POST
 }

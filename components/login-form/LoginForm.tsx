@@ -5,25 +5,33 @@ import { User } from "@phosphor-icons/react/dist/ssr/User";
 import { Lock } from "@phosphor-icons/react/dist/ssr/Lock";
 import { redirect } from "next/navigation";
 import { toast } from "react-toastify";
+import { verifyToken } from "@/app/utils/auth";
 
 
 const LoginForm = () => {
-    const [showPassword, setShowPassword] = useState(false);
+    const [isLogging, setIsLoging] = useState(false);
     const handleSubmit =  async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const email = e.currentTarget["email"].value;
         const password = e.currentTarget["password"].value;
+        setIsLoging(true);
         const res = await fetch("/api/auth/login", {
             method: "POST",
             body: JSON.stringify({email, password}),
             headers: {'content-tupe': 'application/json'}
         });
         if(res.ok) {
-            redirect("/")
+            const token = await res.text();
+            const user = await verifyToken(token);
+            localStorage.setItem("auth-user", token);
+            localStorage.setItem("auth-obj", JSON.stringify(user));
+            redirect("/");
         }
         else {
+            console.log(res)
             toast.error("Invalid Username or password", {position: "bottom-center"});
         }
+        setIsLoging(false);
     }
     return (
         <form className="space-y-6 max-w-md min-w-[400px] mx-auto p-6 bg-white rounded-lg shadow-lg absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" onSubmit={handleSubmit}>
@@ -83,10 +91,30 @@ const LoginForm = () => {
 
             <div>
                 <button
+                disabled={isLogging}
                 type="submit"
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#71b2ab] hover:bg-[#5a8f89] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#71b2ab] transition-colors"
                 >
-                Login
+                    {isLogging ? (
+                        <>
+                        <svg
+                            className="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                            ></path>
+                        </svg>
+                        Processing...
+                        </>
+                    ) : (
+                        "Login"
+                    )}
                 </button>
             </div>
 

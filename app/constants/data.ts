@@ -35,7 +35,7 @@ const CATEGORIES: News.ICategory[] = [
       description: ''
     }
   ];
-  const ALLOWEDCATEGORIES = [
+  const ALLOWED_CATEGORIES = [
     "global",
     "palestine",
     "gaza",
@@ -44,7 +44,13 @@ const CATEGORIES: News.ICategory[] = [
     "weather",
     "sports"
   ];
+  const ALLOWED_ROLES = [
+    "admin",
+    "user",
+    "editor"
+  ]
   export { 
     CATEGORIES,
-    ALLOWEDCATEGORIES,
+    ALLOWED_CATEGORIES,
+    ALLOWED_ROLES
   };

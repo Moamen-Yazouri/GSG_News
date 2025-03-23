@@ -1,6 +1,6 @@
 import React from 'react'
-import { fetchNews } from '../services/news.services'
 import LatestNews from '@/components/latest-news/latest-news/LatestNews';
+import { fetchNews } from '@/app/services/news.services';
 
 const page = async () => {
     const latestNews: News.Item[] = await fetchNews('politics', 'gb');

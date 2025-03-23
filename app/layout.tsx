@@ -1,28 +1,44 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/Header/Header";
+import { Roboto, Mulish } from 'next/font/google';
+import classNames from "classnames";
 import { ToastContainer } from "react-toastify";
 
-export const metadata: Metadata = {
-  title: "GSG_News",
-  description: "This is web application is for Palestine news, created by GSG",
-};
-interface IProps {
-  children: React.ReactNode;
-  latestUS: React.ReactNode;
-  latestGB: React.ReactNode;
-}
-export default function RootLayout({children, latestGB, latestUS}: IProps) {
+const robotoFont = Roboto({
+    weight: ['400', '700'],
+    subsets: ['latin'],
+    style: ['italic', 'normal'],
+    fallback: ['Arial', 'Helvetica', 'sans-serif'],
+    display: 'swap',
+    variable: '--font-roboto'
+});
 
-  return (
-    <html lang="en">
-      <body>
-        <ToastContainer/>
-        <Header/>
-        {children}
-        {/* <section>{latestGB}</section>
-        <section>{latestUS}</section> */}
-      </body>
-    </html>
-  );
+const mulishFont = Mulish({
+    weight: ['400', '700'],
+    subsets: ['latin'],
+    style: ['italic', 'normal'],
+    fallback: ['Arial', 'Helvetica', 'sans-serif'],
+    display: 'swap',
+    variable: '--font-mulish'
+});
+
+export const metadata: Metadata = {
+    title: "GSG News",
+    description: "GSG News, get latest news around the world"
+};
+
+interface IProps {
+    children: React.ReactNode;
+}
+
+export default function RootLayout({ children }: IProps) {
+    return (
+        // We used the .variable as class name (not .className) to pass the css variable :) 
+        <html lang="en">
+        <body>
+            <ToastContainer />
+            {children}
+        </body>
+        </html>
+    );
 }

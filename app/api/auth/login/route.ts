@@ -15,7 +15,6 @@ const POST = async (req: NextRequest) => {
     if(!isValidPassword) {
         return new NextResponse("Invalid credintials", {status: 401});
     }
-    delete user.password
     const token = generateToken(user);
     return new NextResponse(token, {status: 200});
 }

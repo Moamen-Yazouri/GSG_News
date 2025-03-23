@@ -4,7 +4,7 @@ import Category from '../Category/Category'
 
 const Categories = () => {
     return (
-        <div className="flex items-center justify-between flex-wrap">
+        <div className="flex items-center justify-center gap-[20px] flex-wrap">
             {
                 CATEGORIES.map((cat, index) => 
                     <Category key={index} imgUrl={cat.imgUrl} description={cat.description} title={cat.title} />

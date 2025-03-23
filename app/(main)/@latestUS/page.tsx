@@ -1,5 +1,5 @@
 import React from 'react'
-import { fetchNews } from '../services/news.services'
+import { fetchNews } from '@/app/services/news.services'
 import LatestNews from '@/components/latest-news/latest-news/LatestNews';
 
 const page = async () => {

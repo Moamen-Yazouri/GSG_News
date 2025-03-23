@@ -118,7 +118,6 @@ const LoginForm = () => {
                 </button>
             </div>
 
-            {/* Sign Up Prompt */}
             <div className="text-center text-sm text-gray-500">
                 <span>Don&apos;t have an account?</span>
                 <Link href="/user/signup" className="font-medium text-[#71b2ab] hover:text-[#5a8f89] transition-colors ml-1">

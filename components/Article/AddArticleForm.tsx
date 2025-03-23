@@ -2,7 +2,7 @@
 import React, { startTransition, useActionState, useEffect, useState } from 'react'
 import { addArticle } from '@/app/controllers/news-actions';
 import SubmitArticle from './SubmitArticle';
-import { validation } from '@/app/utils/validation';
+import { articleValidation } from '@/app/utils/validation';
 
 const AddArticleForm = () => {
     const [errors, setErrors] = useState<string[]>([]);
@@ -31,7 +31,7 @@ const AddArticleForm = () => {
             summary: formData.get("summary") as string,
             category: formData.get("category") as string,
         };
-        const fieldsErrors = validation(item);
+        const fieldsErrors = articleValidation(item);
         setErrors(fieldsErrors)
         if(fieldsErrors.length == 0) {
             startTransition(() => {

@@ -1,6 +1,6 @@
-import { ALLOWEDCATEGORIES } from "../constants/data";
+import { ALLOWED_CATEGORIES, ALLOWED_ROLES } from "../constants/data";
 
-const validation = (article: News.Item_): string[] => {
+const articleValidation = (article: News.Item_): string[] => {
     const errors = [];
     if(Object.values(article).some(value => value === "")) {
         errors.push("Please Fill all fields..!")
@@ -8,7 +8,7 @@ const validation = (article: News.Item_): string[] => {
     if(article.author.length < 4) {
         errors.push("Author name is shorter than expected..!");
     }
-    if(!ALLOWEDCATEGORIES.includes(article.category)) {
+    if(!ALLOWED_CATEGORIES.includes(article.category)) {
         errors.push("Invalid category..!");
     }
     if(article.date > Date.now()) {
@@ -25,6 +25,28 @@ const validation = (article: News.Item_): string[] => {
     }
     return errors
 }
+
+const userValidation = (user: News.IUser): string[] => {
+    const errors = [];
+    const emailExp = /^[a-zA-Z0-9._%+-]{3,}@[a-zA-Z0-9.-]{3,}\.[a-zA-Z]{2,}$/;
+    if(Object.values(user).some(value => value === "")) {
+        errors.push("Please Fill all fields!");
+    }
+    if(!emailExp.test(user.email)) {
+        errors.push("the email should be like: user@example.com");
+    }
+    if(user.displayName.length < 4) {
+        errors.push("The Displayname should be longer than 3 chars!")
+    }
+    if(!ALLOWED_ROLES.includes(user.role)) {
+        errors.push("Please Select a Valid Role!");
+    }
+    if(user.password?.length < 4 ) {
+        errors.push("The Password Have to be longer than 3 chars!")
+    }
+    return errors;
+}
 export {
-    validation
+    articleValidation,
+    userValidation,
 }

@@ -15,12 +15,9 @@ interface IProps {
 export default function RootLayout({children}: IProps) {
 
   return (
-    <html lang="en">
-      <body>
-        <ToastContainer/>
-        <Header/>
-        {children}
-      </body>
-    </html>
+    <div>
+      <Header />
+      {children}
+    </div>
   );
 }

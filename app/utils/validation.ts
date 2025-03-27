@@ -2,7 +2,7 @@ import { ALLOWED_CATEGORIES, ALLOWED_ROLES } from "../constants/data";
 
 const articleValidation = (article: News.Item_): string[] => {
     const errors = [];
-    if(Object.values(article).some(value => value === "")) {
+    if(Object.values(article).some(value => value === "" )) {
         errors.push("Please Fill all fields..!")
     }
     if(article.author.length < 4) {
@@ -41,7 +41,7 @@ const userValidation = (user: News.IUser): string[] => {
     if(!ALLOWED_ROLES.includes(user.role)) {
         errors.push("Please Select a Valid Role!");
     }
-    if(user.password?.length < 4 ) {
+    if(user.password && user.password.length < 4 ) {
         errors.push("The Password Have to be longer than 3 chars!")
     }
     return errors;

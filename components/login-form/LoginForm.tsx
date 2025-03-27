@@ -22,9 +22,9 @@ const LoginForm = () => {
         });
         if(res.ok) {
             const token = await res.text();
-            const user = await verifyToken(token);
-            // localStorage.setItem("auth-user", token);
-            // localStorage.setItem("auth-obj", JSON.stringify(user));
+            
+            localStorage.setItem("auth-user", token);
+            
             toast.done("You are logged, you will be redirected..!")
             redirect("/");
         }

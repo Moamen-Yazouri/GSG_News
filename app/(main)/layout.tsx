@@ -16,6 +16,7 @@ export default function RootLayout({children}: IProps) {
 
   return (
     <div>
+      <ToastContainer/>
       <Header />
       {children}
     </div>

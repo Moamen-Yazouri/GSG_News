@@ -1,10 +1,10 @@
-    'use server';
+'use server';
+import {compareSync, hashSync} from "bcryptjs";
+import {jwtVerify, SignJWT} from "jose";
 
-import { compareSync, hashSync } from "bcryptjs";
-import jwt from 'jsonwebtoken';
-const JWT_SECRET = process.env.JWT_SECRET || '';
-
-const comparePassword = (password: string, hashedPassword: string): boolean => {
+const JWT_SECRET: string = process.env.JWT_SECRET || '';
+const secretKey = new TextEncoder().encode(JWT_SECRET);
+const comparePassword: (password: string, hashedPassword: string) => boolean = (password: string, hashedPassword: string): boolean => {
     return compareSync(password, hashedPassword);
 }
 
@@ -12,24 +12,24 @@ const hashPassword = (password: string): string => {
     return hashSync(password);
 }
 
-const generateToken = (user: News.IUser): string => {
-    console.log(JWT_SECRET);
-
-    const token = jwt.sign(
-        { email: user.email, role: user.role, displayName: user.displayName },
-        JWT_SECRET,
-        { expiresIn: '1w' }
-    );
-
-    return token;
+const generateToken: (user: News.IUser) => Promise<string> = async (user: News.IUser): Promise<string> => {
+    return await new SignJWT({email: user.email, displayName: user.displayName, role: user.role})
+        .setProtectedHeader({alg: 'HS256'})
+        .setIssuedAt()
+        .setExpirationTime('1w')
+        .sign(secretKey);
 }
 
-const verifyToken = async (token: string): Promise<News.IUser | null> => {
+const verifyToken: (token: string) => Promise<News.IUser | null> = async (token: string): Promise<News.IUser | null> => {
     try {
-        const user = jwt.verify(token, JWT_SECRET);
-
-        return user as News.IUser;
-    } catch (err) {
+        const {payload} =  await jwtVerify(token, secretKey);
+        const {email, displayName, role}= payload;
+        return {
+            email: email as string,
+            displayName: displayName as string,
+            role: role as string
+        } as News.IUser;
+    } catch {
         return null;
     }
 }

@@ -16,9 +16,10 @@ const POST = async (req: NextRequest) => {
     if(!isValidPassword) {
         return new NextResponse("Invalid credintials", {status: 401});
     }
-    const token = generateToken(user);
+    delete user.password;
+    const token = await generateToken(user);
     (await cookies()).set('auth-token', token, {
-        maxAge: 10000 
+        maxAge: 1000000 
     })
     return new NextResponse(token, {status: 200});
 }
